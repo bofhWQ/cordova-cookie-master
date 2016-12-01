@@ -113,6 +113,8 @@ public class CookieEmperor extends CordovaPlugin {
                         public void run() {
                             try {
                                 XWalkCookieManager cookieManager = new XWalkCookieManager();
+                                cookieManager.setAcceptCookie(true);
+                                cookieManager.setAcceptFileSchemeCookies(true);
                                 cookieManager.setCookie(url, cookieName + "=" + cookieValue);
 
                                 PluginResult res = new PluginResult(PluginResult.Status.OK, "Successfully added cookie");
