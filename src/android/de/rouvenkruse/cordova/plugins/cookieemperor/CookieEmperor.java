@@ -29,7 +29,7 @@ public class CookieEmperor extends CordovaPlugin {
         else if (ACTION_CLEAR_COOKIES.equals(action)) {
             XWalkCookieManager cookieManager = new XWalkCookieManager();
 
-            cookieManager.clearCookies();
+            cookieManager.removeAllCookie();
 
             callbackContext.success();
         }
