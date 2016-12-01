@@ -10,7 +10,7 @@ import org.json.JSONException;
 
 import android.os.Build;
 import android.webkit.ValueCallback;
-import android.webkit.CookieManager;
+import org.crosswalk.engine.XWalkCookieManager;
 
 public class CookieEmperor extends CordovaPlugin {
 
@@ -27,20 +27,9 @@ public class CookieEmperor extends CordovaPlugin {
             return this.setCookie(args, callbackContext);
         }
         else if (ACTION_CLEAR_COOKIES.equals(action)) {
-            CookieManager cookieManager = CookieManager.getInstance();
+            XWalkCookieManager cookieManager = new XWalkCookieManager();
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-                cookieManager.removeAllCookies(new ValueCallback<Boolean>() {
-                    @Override
-                    public void onReceiveValue(Boolean value) {}
-                });
-
-                cookieManager.flush();
-            }
-            else {
-                cookieManager.removeAllCookie();
-                cookieManager.removeSessionCookie();
-            }
+            cookieManager.clearCookies();
 
             callbackContext.success();
         }
@@ -66,7 +55,7 @@ public class CookieEmperor extends CordovaPlugin {
                     .execute(new Runnable() {
                         public void run() {
                             try {
-                                CookieManager cookieManager = CookieManager.getInstance();
+                                XWalkCookieManager cookieManager = new XWalkCookieManager();
                                 String[] cookies = cookieManager.getCookie(url).split("; ");
                                 String cookieValue = "";
 
@@ -123,7 +112,7 @@ public class CookieEmperor extends CordovaPlugin {
                     .execute(new Runnable() {
                         public void run() {
                             try {
-                                CookieManager cookieManager = CookieManager.getInstance();
+                                XWalkCookieManager cookieManager = new XWalkCookieManager();
                                 cookieManager.setCookie(url, cookieName + "=" + cookieValue);
 
                                 PluginResult res = new PluginResult(PluginResult.Status.OK, "Successfully added cookie");
