@@ -10,7 +10,7 @@ import org.json.JSONException;
 
 import android.os.Build;
 import android.webkit.ValueCallback;
-import org.crosswalk.engine.XWalkCookieManager;
+import org.xwalk.core.XWalkCookieManager;
 
 public class CookieEmperor extends CordovaPlugin {
 
